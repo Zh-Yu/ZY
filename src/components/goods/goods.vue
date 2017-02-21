@@ -2,7 +2,8 @@
 <div class="goods">
   <div class="menu-wrapper" v-el:menu-wrapper>
   	<ul>
-  		<li v-for="item in goods" class="menu-item" :class="{'current':currentIndex===$index}">
+  		<li v-for="item in goods" class="menu-item" :class="{'current':currentIndex===$index}"
+  		@click="selectMenu($index)">
   		  <span class="text border-1px">
   		  	<span v-show="item.type>0" class="icon" :class="classmap[item.type]"></span>{{item.name}}
   		  </span> 			
@@ -58,7 +59,7 @@ import BScroll from 'better-scroll';
         for(let i=0; i<this.listHeight.length;i++){
           let height1 = this.listHeight[i];
           let height2 = this.listHeight[i + 1];
-          if(!height2 || (this.scrollY > height1 && this.scrollY < height2)){
+          if(!height2 || (this.scrollY >=height1 && this.scrollY < height2)){
             return i;
           }
         }
@@ -79,6 +80,11 @@ import BScroll from 'better-scroll';
    	  });
    	},
    	methods: {
+   	selectMenu(index){
+      let foodList = this.$els.foodsWrapper.getElementsByClassName('food-list-hock');
+      let el = foodList[index];
+      this.foodsScroll.scrollToElement(el,300)
+   	},
    	_initScroll(){
        this.menuScroll = new BScroll(this.$els.menuWrapper,{});
        this.foodsScroll = new BScroll(this.$els.foodsWrapper,{
@@ -96,7 +102,7 @@ import BScroll from 'better-scroll';
       for(let i=0;i<foodList.length;i++){
         let item = foodList[i];
         height +=item.clientHeight;
-        this.listHeight.push('height');
+        this.listHeight.push(height);
       }
    	}
    	}
