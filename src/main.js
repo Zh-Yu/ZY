@@ -5,6 +5,8 @@ import App from './App';
 import goods from 'components/goods/goods.vue';
 import ratings from 'components/ratings/ratings.vue';
 import seller from 'components/seller/seller.vue';
+import computers from 'components/computers/computers.vue';
+
 
 import 'common/stylus/index.styl';
 
@@ -26,8 +28,11 @@ router.map({
 	},
 	'/seller':{
 		component: seller
+	},
+	'/computers':{
+		component: computers
 	}
 });
 
 router.start(app,'#app');
-router.go('/goods');     //改变哈希地址
+router.go('/computers');     //改变哈希地址

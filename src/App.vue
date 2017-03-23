@@ -2,11 +2,12 @@
   <div>
    <v-header :seller="seller"></v-header>
    <div class="tab border-1px">
+     <div class="tab-item"><a v-link="{path:'/computers'}">买不亏</a></div>
      <div class="tab-item"><a v-link="{path:'/goods'}">商品</a></div>
      <div class="tab-item"><a v-link="{path:'/ratings'}">评论</a></div>
      <div class="tab-item"><a v-link="{path:'/seller'}">商家</a></div>
    </div>
-   <router-view :seller="seller"></router-view>
+   <router-view :seller="seller" :data="data"></router-view>
   </div>
 </template>
 
@@ -20,7 +21,8 @@ export default {
   },
   data() {
     return{
-      seller:{}
+      seller:{},
+      data:[]
     }
   },
   created(){
@@ -29,6 +31,10 @@ export default {
       if(response.errno===ERR_OK){
         this.seller = response.data;
       }
+    });
+    this.$http.get('http://www.xiaohongchun.com.cn/lsj/v1/home/rec?page_mark=-1&page_size=40').then((response) => {
+      response = response.body;
+      this.data = response.data;
     });
     }
   }
