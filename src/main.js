@@ -2,16 +2,19 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
 import App from './App';
-import goods from 'components/goods/goods.vue';
-import ratings from 'components/ratings/ratings.vue';
-import seller from 'components/seller/seller.vue';
-import computers from 'components/computers/computers.vue';
+import name from 'components/homepage/component/name.vue';
+import disease from 'components/homepage/component/disease.vue';
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';    
 
 
 import 'common/stylus/index.styl';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
+Vue.use(iView);
+
+
 
 let app = Vue.extend(App);
 
@@ -20,19 +23,13 @@ let router = new VueRouter({
 });
 
 router.map({
-	'/goods':{
-		component: goods
+	'/name':{
+		component: name
 	},
-	'/ratings':{
-		component:ratings
-	},
-	'/seller':{
-		component: seller
-	},
-	'/computers':{
-		component: computers
+	'/disease':{
+		component: disease
 	}
 });
 
 router.start(app,'#app');
-router.go('/computers');     //改变哈希地址
+router.go('/name');     //改变哈希地址
