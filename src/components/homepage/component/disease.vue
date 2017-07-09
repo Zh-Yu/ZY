@@ -32,9 +32,9 @@
                         filterMultiple: false,
                         filterMethod (value, row) {
                             if (value === 1) {
-                                return row.show == '腺癌';
+                                return row.desc == '腺癌';
                             } else if (value === 2) {
-                                return row.show == '鳞癌';
+                                return row.desc == '鳞癌';
                             }
                         }
                     },
@@ -56,9 +56,9 @@
                         filterMultiple: false,
                         filterMethod (value, row) {
                             if (value === 1) {
-                                return row.show == '左肺上叶';
+                                return row.location == '左肺上叶';
                             } else if (value === 2) {
-                                return row.show == '右肺中叶';
+                                return row.location == '右肺中叶';
                             }
                         }
                     },                    
