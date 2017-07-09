@@ -43,6 +43,9 @@
 </script>
 
 <style type="text/css">
+a{
+	color:black;
+}
 .inputname {   
     width: 30%;
     margin-bottom: 40px;

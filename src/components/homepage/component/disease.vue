@@ -1,6 +1,6 @@
 <template>
 <div>
-    <i-table height="400" :columns="columns" :data="data" size="small" v-ref:table></i-table>
+    <i-table height="500" :columns="columns" :data="data" size="small" v-ref:table></i-table>
     <br>
     <Row>
         <i-col span="8"><i-button type="primary" size="large" @click="exportData(1)"><Icon type="ios-download-outline"></Icon> 导出原始数据</i-button></i-col>

@@ -39,8 +39,8 @@
                 <Icon type="ios-navigate"></Icon>
                 病例
               </template>
-              <Menu-item name="1-1"><a v-link="{path:'name'}">按姓名</a></Menu-item>
-              <Menu-item name="1-2"><a v-link="{path:'disease'}">按病症/有无CT</a></Menu-item>
+              <a v-link="{path:'name'}" @click="changecolor" :class={"toblue":toblue}><Menu-item name="1-1">按姓名</Menu-item></a>
+              <a v-link="{path:'disease'}"><Menu-item name="1-2">按病症/有无CT</Menu-item></a>
               <Menu-item name="1-3">添加</Menu-item>
             </Submenu>
             <Submenu name="2">
@@ -84,7 +84,7 @@
     </div>
     <div class="layout-copy">
         小兔和小咪 &copy; summer2017
-    </div>
+    </div>    
   </div>
 </div>
 </template>
@@ -95,6 +95,13 @@ const ERR_OK = 0;
 export default {
   data() {
     return{
+      toblue: false
+    }
+  },
+  methods:{
+    changecolor(){
+      this.toblue = true;
+      alert("bianse");
     }
   }
   }
@@ -102,8 +109,14 @@ export default {
 
 
 <style scoped>
+  a{
+    color:#657180;
+  }
+  a:active {
+    color:blue;
+  }
   .layout{
-    border: 1px solid #d7dde4;
+    /*border: 1px solid #d7dde4;*/
     background: #f5f7f9;
   }
   .layout-logo{
@@ -142,5 +155,11 @@ export default {
     text-align: center;
     padding: 10px 0 20px;
     color: #9ea7b4;
+    position: fixed;
+    bottom: 0;
+    left: 43%;
+  }
+  .toblue{
+    color: red;
   }
 </style>
