@@ -1,4 +1,5 @@
 <template>
+<div>
     <i-table height="400" :columns="columns" :data="data" size="small" v-ref:table></i-table>
     <br>
     <Row>
@@ -6,6 +7,7 @@
         <i-col span="8"><i-button type="primary" size="large" @click="exportData(2)"><Icon type="ios-download-outline"></Icon> 导出排序和过滤后的数据</i-button></i-col>
         <i-col span="8"><i-button type="primary" size="large" @click="exportData(3)"><Icon type="ios-download-outline"></Icon> 导出自定义数据</i-button></i-col>
     </Row>
+</div>
 </template>
 <script>
     export default {
@@ -155,7 +157,7 @@
                 data: [
                     {
                     	"desc": "腺癌",
-                    	"location":"左肺上叶",
+                    	"location": "左肺上叶",
                         "name": "推广名称1",
                         "CT": '有',
                         "sex": 1563,
@@ -173,8 +175,8 @@
                         "month": 5610                      
                     },
                     {
-                    	"desc": "腺癌",
-                    	"location":"左肺上叶",
+                    	"desc": "鳞癌",
+                    	"location": "左肺上叶",
                         "name": "推广名称1",
                         "CT": '有',
                         "sex": 1563,    
@@ -195,7 +197,7 @@
                     },
                     {
                     	"desc": "腺癌",
-                    	"location":"左肺上叶",
+                    	"location": "左肺上叶",
                         "name": "推广名称1",
                         "CT": '有',
                         "sex": 1563,    
@@ -215,7 +217,7 @@
                     },
                     {
                     	"desc": "腺癌",
-                    	"location":"左肺上叶",
+                    	"location": "右肺中叶",
                         "name": "推广名称1",
                         "CT": '有',
                         "sex": 1563,  
@@ -233,10 +235,10 @@
                         "week": 1655,                        
                     },
                     {
-                    	"desc": "腺癌",
-                    	"location":"左肺上叶",
+                    	"desc": "鳞癌",
+                    	"location": "左肺上叶",
                         "name": "推广名称1",
-                        "CT": '有',
+                        "CT": '无',
                         "sex": 1563, 
                         "elecde": "333",
                         "elecnor": "444",                       
@@ -254,7 +256,7 @@
                     },
                     {
                     	"desc": "腺癌",
-                    	"location":"左肺上叶",
+                    	"location": "左肺上叶",
                         "name": "推广名称1",
                         "CT": '有',
                         "sex": 1563,    
@@ -274,7 +276,7 @@
                     },
                     {
                     	"desc": "腺癌",
-                    	"location":"左肺上叶",
+                    	"location": "右肺中叶",
                         "name": "推广名称1",
                         "CT": '有',
                         "sex": 1563, 
@@ -294,7 +296,7 @@
                     },
                     {
                     	"desc": "腺癌",
-                    	"location":"左肺上叶",
+                    	"location": "左肺上叶",
                         "name": "推广名称1",
                         "CT": '有',
                         "sex": 1563,   
@@ -314,9 +316,9 @@
                     },
                     {
                     	"desc": "腺癌",
-                    	"location":"左肺上叶",
+                    	"location": "右肺中叶",
                         "name": "推广名称1",
-                        "CT": '有',
+                        "CT": '无',
                         "sex": 1563,   
                         "elecde": "333",
                         "elecnor": "444",                     
@@ -333,8 +335,8 @@
                         "month": 3190
                     },
                     {
-                    	"desc": "腺癌",
-                    	"location":"左肺上叶",
+                    	"desc": "鳞癌",
+                    	"location": "左肺上叶",
                         "name": "推广名称1",
                         "CT": '有',
                         "sex": 1563,   
