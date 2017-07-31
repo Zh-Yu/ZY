@@ -1,7 +1,7 @@
 <template>
  <div>
   <div class="layout">
-    <Menu mode="horizontal" theme="dark" active-name="1">
+    <Menu mode="horizontal" theme="dark" active-key="1">
       <div class="layout-logo"></div>
       <div class="layout-nav">
         <Menu-item key="1">
@@ -33,45 +33,48 @@
     <div class="layout-content">
       <Row>
         <i-col span="5">
-          <Menu :active-name="$route.path" width="auto" :open-names="['1']" @on-select="menuChange">
-            <Submenu name="1">
+          <Menu :active-key="$route.path.replace('/','')" :open-keys="[$route.path.match(/^\/(.*)\//)[1]]" width="auto"  @on-select="menuChange">
+            <Submenu key="information">
               <template slot="title">
                 <Icon type="ios-navigate"></Icon>
                 病例
               </template>
-              <Menu-item key="name" name="name">按姓名</Menu-item>
-              <Menu-item key="disease" name="disease">按病症/有无CT</Menu-item>
-              <Menu-item key="1-3">添加</Menu-item>
+              <Menu-item key="information/name">按姓名</Menu-item>
+              <Menu-item key="information/disease">按病症/有无CT</Menu-item>
+              <Menu-item key="information/add">添加</Menu-item>
             </Submenu>
-            <Submenu name="2">
+            <Submenu key="CT">
               <template slot="title">
                 <Icon type="ios-keypad"></Icon>
                 CT
               </template>
-              <Menu-item key="2-1">原始CT</Menu-item>
-              <Menu-item key="2-2">CT</Menu-item>
-              <Menu-item key="2-3">添加</Menu-item>
+              <Menu-item key="CT/dicomCT">原始CT</Menu-item>
+              <!-- <Menu-item key="2/2-2">CT</Menu-item> -->
+              <!-- <Menu-item key="2/2-3">添加</Menu-item> -->
             </Submenu>
-            <Submenu name="3">
+            <!-- <Submenu key="3">
               <template slot="title">
                 <Icon type="ios-analytics"></Icon>
                 电导率
               </template>
-              <Menu-item key="3-1">按姓名</Menu-item>
-              <Menu-item key="3-2">按病症</Menu-item>
-              <Menu-item key="3-3">添加</Menu-item>
-            </Submenu>
-            <Submenu name="4">
+              <Menu-item key="3/3-1">癌症实部</Menu-item>
+              <Menu-item key="3/3-2">癌症虚部</Menu-item>
+              <Menu-item key="3/3-3">正常实部</Menu-item>
+              <Menu-item key="3/3-4">正常虚部</Menu-item>
+              <Menu-item key="3/3-5">癌症-正常实部</Menu-item>
+              <Menu-item key="3/3-6">癌症-正常虚部</Menu-item>
+            </Submenu> -->
+            <Submenu key="station">
               <template slot="title">
                 <Icon type="ios-paper"></Icon>
                 空气质量
               </template>
-              <Menu-item key="4-1">xxx观测站</Menu-item>
-              <Menu-item key="4-2">xxx观测站</Menu-item>
-              <Menu-item key="4-3">xxx观测站</Menu-item>
-              <Menu-item key="4-4">xxx观测站</Menu-item>
-              <Menu-item key="4-5">xxx观测站</Menu-item>
-              <Menu-item key="4-6">xxx观测站</Menu-item>
+              <Menu-item key="station/pollutants">污染物数据</Menu-item>
+              <!-- <Menu-item key="station/4-2">xxx观测站</Menu-item>
+              <Menu-item key="station/4-3">xxx观测站</Menu-item>
+              <Menu-item key="station/4-4">xxx观测站</Menu-item>
+              <Menu-item key="station/4-5">xxx观测站</Menu-item>
+              <Menu-item key="station/4-6">xxx观测站</Menu-item> -->
             </Submenu>
           </Menu>
         </i-col>
@@ -98,12 +101,11 @@ export default {
   },
   methods:{
     menuChange(key) {
-      this.$router.replace('/'+key);
+      // this.$router.replace(key);
+      this.$router.replace("/"+key);
+      // this.$router.replace(key);
+      // console.log(this.$route.path.split("/")[2]);
     }
-    // changecolor(){
-    //   this.toblue = true;
-    //   alert("bianse");
-    // }
   }
 }
 </script>
@@ -159,8 +161,5 @@ export default {
     position: fixed;
     bottom: 0;
     left: 43%;
-  }
-  .toblue{
-    color: red;
   }
 </style>

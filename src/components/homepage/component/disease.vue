@@ -1,11 +1,11 @@
 <template>
 <div>
-    <i-table height="500" :columns="columns" :data="data" size="small" v-ref:table></i-table>
+    <i-table height="500" :columns="columns" :data="data" size="small" v-ref:table border></i-table>
     <br>
-    <Row>
+    <Row class="databtn">
         <i-col span="8"><i-button type="primary" size="large" @click="exportData(1)"><Icon type="ios-download-outline"></Icon> 导出原始数据</i-button></i-col>
         <i-col span="8"><i-button type="primary" size="large" @click="exportData(2)"><Icon type="ios-download-outline"></Icon> 导出排序和过滤后的数据</i-button></i-col>
-        <i-col span="8"><i-button type="primary" size="large" @click="exportData(3)"><Icon type="ios-download-outline"></Icon> 导出自定义数据</i-button></i-col>
+        <!-- <i-col span="8"><i-button type="primary" size="large" @click="exportData(3)"><Icon type="ios-download-outline"></Icon> 导出自定义数据</i-button></i-col> -->
     </Row>
 </div>
 </template>
@@ -14,10 +14,17 @@
         data () {
             return {
                 columns: [
+                	{
+                		"title": "序号",
+                        "type": "index",
+                        "width": 60,
+                        "align": "center"
+                    },
                     {
                         "title": "癌变种类",
-                        "key": "desc",
+                        "key": "type",
                         "width": 150,
+                        "align": "center",
                         "sortable": true,
                         filters: [
                             {
@@ -32,9 +39,9 @@
                         filterMultiple: false,
                         filterMethod (value, row) {
                             if (value === 1) {
-                                return row.desc == '腺癌';
+                                return row.type == '腺癌';
                             } else if (value === 2) {
-                                return row.desc == '鳞癌';
+                                return row.type == '鳞癌';
                             }
                         }
                     },
@@ -42,6 +49,7 @@
                         "title": "癌变位置",
                         "key": "location",
                         "width": 150,
+                        "align": "center",
                         "sortable": true,
                         filters: [
                             {
@@ -66,6 +74,7 @@
                         "title": "CT",
                         "key": "CT",
                         "width": 100,
+                        "align": "center",
                         "sortable": true,
                         filters: [
                             {
@@ -89,270 +98,253 @@
                     {
                         "title": "姓名",
                         "key": "name",
-                        // "fixed": "left",
+                        "align": "center",
                         "width": 100
                     },
                     {
                         "title": "性别",
                         "key": "sex",
-                        "width": 150,
-                        "sortable": true
+                        "width": 100,
+                        "align": "center",
+                        "sortable": true,
+                        filters: [
+                            {
+                                label: '男',
+                                value: 1
+                            },
+                            {
+                                label: '女',
+                                value: 2
+                            }
+                        ],
+                        filterMultiple: false,
+                        filterMethod (value, row) {
+                            if (value === 1) {
+                                return row.sex == '男';
+                            } else if (value === 2) {
+                                return row.sex == '女';
+                            }
+                        }
                     },                  
                     
                     {
                         "title": "电导率(癌症)",
-                        "key": "elecde",
+                        "key": "elecdisease",
                         "width": 150,
+                        "align": "center",
                         "sortable": true
                     },
                     {
                         "title": "电导率(正常)",
-                        "key": "elecnor",
+                        "key": "elecnormal",
+                        "width": 150,
+                        "align": "center",
+                        "sortable": true
+                    },
+                    {
+                        "title": "备注",
+                        "key": "extra",
                         "width": 150,
                         "sortable": true
                     },
                     {
-                        "title": "激活",
-                        "key": "active",
-                        "width": 150,
+                        "title": "癌症实部",
+                        "key": "disreal",
+                        "width": 600,
                         "sortable": true
                     },
                     {
-                        "title": "7日留存",
-                        "key": "day7",
-                        "width": 150,
+                        "title": "癌症虚部",
+                        "key": "disimag",
+                        "width": 600,
                         "sortable": true
                     },
                     {
-                        "title": "30日留存",
-                        "key": "day30",
-                        "width": 150,
+                        "title": "正常实部",
+                        "key": "norreal",
+                        "width": 600,
                         "sortable": true
                     },
                     {
-                        "title": "次日留存",
-                        "key": "tomorrow",
-                        "width": 150,
+                        "title": "正常虚部",
+                        "key": "norimag",
+                        "width": 600,
                         "sortable": true
                     },
                     {
-                        "title": "日活跃",
-                        "key": "day",
-                        "width": 150,
+                        "title": "癌症-正常实部",
+                        "key": "diffreal",
+                        "width": 600,
                         "sortable": true
                     },
                     {
-                        "title": "周活跃",
-                        "key": "week",
-                        "width": 150,
-                        "sortable": true
-                    },
-                    {
-                        "title": "月活跃",
-                        "key": "month",
-                        "width": 150,
+                        "title": "癌症-正常虚部",
+                        "key": "diffimag",
+                        "width": 600,
                         "sortable": true
                     }
                 ],
                 data: [
                     {
-                    	"desc": "腺癌",
+                    	"type": "腺癌",
                     	"location": "左肺上叶",
                         "name": "推广名称1",
                         "CT": '有',
-                        "sex": 1563,
-                        "elecde": "333",
-                        "elecnor": "444",
-                        "fav": 0,                        
-                        "weak": 5627,                        
-                        "click": 4254,
-                        "active": 1438,
-                        "day7": 274,
-                        "day30": 285,
-                        "tomorrow": 1727,
-                        "day": 558,
-                        "week": 4440,
-                        "month": 5610                      
+                        "sex": "男",
+                        "elecdisease": "333",
+                        "elecnormal": "444",
+                        "extra": "计算",                                               
+                        "disreal": 4254,
+                        "disimag": 1438,
+                        "norreal": 100,
+                        "norimag": 285,
+                        "diffreal": 1727,
+                        "diffimag": 558,                   
                     },
                     {
-                    	"desc": "鳞癌",
+                    	"type": "鳞癌",
                     	"location": "左肺上叶",
                         "name": "推广名称1",
                         "CT": '有',
-                        "sex": 1563,    
-                        "elecde": "333",
-                        "elecnor": "444",                	
-                        "fav": 0,                        
-                        "weak": 4086,                        
-                        "click": 8690,
-                        "active": 8470,
-                        "day7": 8172,
-                        "day30": 5197,
-                        "tomorrow": 1684,
-                        "day": 2593,
-                        "week": 2507,
-                        "month": 1537,
-                        
-                        
+                        "sex": "女",    
+                        "elecdisease": "333",
+                        "elecnormal": "444",                	
+                        "extra": "计算",                                                
+                        "disreal": 4254,
+                        "disimag": 1438,
+                        "norreal": 100,
+                        "norimag": 285,
+                        "diffreal": 1727,
+                        "diffimag": 558,                                                  
                     },
                     {
-                    	"desc": "腺癌",
+                    	"type": "腺癌",
                     	"location": "左肺上叶",
                         "name": "推广名称1",
                         "CT": '有',
-                        "sex": 1563,    
-                        "elecde": "333",
-                        "elecnor": "444",                  
-                        "fav": 0,
-                        "show": '兔',
-                        "weak": 8007,                       
-                        "click": 1879,
-                        "active": 16,
-                        "day7": 2249,
-                        "day30": 3450,
-                        "tomorrow": 377,
-                        "day": 1561,
-                        "week": 3219,
-                        "month": 1588,                       
+                        "sex": "男",    
+                        "elecdisease": "333",
+                        "elecnormal": "444",                  
+                        "extra": "仅正常",
+                        "show": '兔',                      
+                        "disreal": 4254,
+                        "disimag": 1438,
+                        "norreal": 100,
+                        "norimag": 285,
+                        "diffreal": 1727,
+                        "diffimag": 558,                         
                     },
                     {
-                    	"desc": "腺癌",
+                    	"type": "腺癌",
                     	"location": "右肺中叶",
                         "name": "推广名称1",
                         "CT": '有',
-                        "sex": 1563,  
-                        "elecde": "333",
-                        "elecnor": "444",                      
-                        "fav": 0,
-                        "show": 9911,
-                        "weak": 8976,                        
-                        "click": 8050,
-                        "active": 7668,
-                        "day7": 1547,
-                        "day30": 2357,
-                        "tomorrow": 7278,
-                        "day": 5309,
-                        "week": 1655,                        
+                        "sex": "男",  
+                        "elecdisease": "333",
+                        "elecnormal": "444",                      
+                        "extra": "混合在一起",                        
+                        "disreal": 4254,
+                        "disimag": 1438,
+                        "norreal": 100,
+                        "norimag": 285,
+                        "diffreal": 1727,
+                        "diffimag": 558,                          
                     },
                     {
-                    	"desc": "鳞癌",
+                    	"type": "鳞癌",
                     	"location": "左肺上叶",
                         "name": "推广名称1",
                         "CT": '无',
-                        "sex": 1563, 
-                        "elecde": "333",
-                        "elecnor": "444",                       
-                        "fav": 0,
-                        "show": 934,
-                        "weak": 1394,                        
-                        "click": 5278,
-                        "active": 9256,
-                        "day7": 209,
-                        "day30": 3563,
-                        "tomorrow": 8285,
-                        "day": 1230,
-                        "week": 4840,
-                        "month": 9908
+                        "sex": "男", 
+                        "elecdisease": "333",
+                        "elecnormal": "444",                       
+                        "extra": "计算",                                               
+                        "disreal": 4254,
+                        "disimag": 1438,
+                        "norreal": 100,
+                        "norimag": 285,
+                        "diffreal": 1727,
+                        "diffimag": 558,  
                     },
                     {
-                    	"desc": "腺癌",
+                    	"type": "腺癌",
                     	"location": "左肺上叶",
                         "name": "推广名称1",
                         "CT": '有',
-                        "sex": 1563,    
-                        "elecde": "333",
-                        "elecnor": "444",                    
-                        "fav": 0,
-                        "show": 6856,
-                        "weak": 1608,                        
-                        "click": 4949,
-                        "active": 2909,
-                        "day7": 4525,
-                        "day30": 6171,
-                        "tomorrow": 1920,
-                        "day": 1966,
-                        "week": 904,
-                        "month": 6851
+                        "sex": "女",    
+                        "elecdisease": "333",
+                        "elecnormal": "444",                    
+                        "extra": "计算",
+                        "disreal": 4254,
+                        "disimag": 1438,
+                        "norreal": 100,
+                        "norimag": 285,
+                        "diffreal": 1727,
+                        "diffimag": 558,  
                     },
                     {
-                    	"desc": "腺癌",
+                    	"type": "腺癌",
                     	"location": "右肺中叶",
                         "name": "推广名称1",
                         "CT": '有',
-                        "sex": 1563, 
-                        "elecde": "333",
-                        "elecnor": "444",                       
-                        "fav": 0,
-                        "show": 5107,
-                        "weak": 6407,                        
-                        "click": 7970,
-                        "active": 1002,
-                        "day7": 8701,
-                        "day30": 9040,
-                        "tomorrow": 7632,
-                        "day": 4061,
-                        "week": 4359,
-                        "month": 3676
+                        "sex": "男", 
+                        "elecdisease": "333",
+                        "elecnormal": "444",                       
+                        "extra": "计算",
+                        "disreal": 4254,
+                        "disimag": 1438,
+                        "norreal": 100,
+                        "norimag": 285,
+                        "diffreal": 1727,
+                        "diffimag": 558,  
                     },
                     {
-                    	"desc": "腺癌",
+                    	"type": "腺癌",
                     	"location": "左肺上叶",
                         "name": "推广名称1",
                         "CT": '有',
-                        "sex": 1563,   
-                        "elecde": "333",
-                        "elecnor": "444",                     
-                        "fav": 0,
-                        "show": 862,
-                        "weak": 6520,                        
-                        "click": 3209,
-                        "active": 6801,
-                        "day7": 6364,
-                        "day30": 6850,
-                        "tomorrow": 9408,
-                        "day": 2481,
-                        "week": 1479,
-                        "month": 2346
+                        "sex": "女",   
+                        "elecdisease": "333",
+                        "elecnormal": "444",                     
+                        "extra": "计算",
+                        "disreal": 4254,
+                        "disimag": 1438,
+                        "norreal": 100,
+                        "norimag": 285,
+                        "diffreal": 1727,
+                        "diffimag": 558,  
                     },
                     {
-                    	"desc": "腺癌",
+                    	"type": "腺癌",
                     	"location": "右肺中叶",
                         "name": "推广名称1",
                         "CT": '无',
-                        "sex": 1563,   
-                        "elecde": "333",
-                        "elecnor": "444",                     
-                        "fav": 0,
-                        "show": 567,
-                        "weak": 5859,                        
-                        "click": 6593,
-                        "active": 1971,
-                        "day7": 7596,
-                        "day30": 3546,
-                        "tomorrow": 6641,
-                        "day": 1611,
-                        "week": 5534,
-                        "month": 3190
+                        "sex": "男",   
+                        "elecdisease": "333",
+                        "elecnormal": "444",                     
+                        "extra": "计算",
+                        "disreal": 4254,
+                        "disimag": 1438,
+                        "norreal": 100,
+                        "norimag": 285,
+                        "diffreal": 1727,
+                        "diffimag": 558,  
                     },
                     {
-                    	"desc": "鳞癌",
+                    	"type": "鳞癌",
                     	"location": "左肺上叶",
                         "name": "推广名称1",
                         "CT": '有',
-                        "sex": 1563,   
-                        "elecde": "333",
-                        "elecnor": "444",                     
-                        "fav": 0,
-                        "show": 3651,
-                        "weak": 1819,                        
-                        "click": 7499,
-                        "active": 7405,
-                        "day7": 8710,
-                        "day30": 5518,
-                        "tomorrow": 428,
-                        "day": 9768,
-                        "week": 2864,
-                        "month": 5811
+                        "sex": "女",   
+                        "elecdisease": "333",
+                        "elecnormal": "444",                     
+                        "extra": "计算",
+                        "disreal": 4254,
+                        "disimag": 1438,
+                        "norreal": 100,
+                        "norimag": 285,
+                        "diffreal": 1727,
+                        "diffimag": 558,  
                     }
                 ]
             }
@@ -368,19 +360,15 @@
                         filename: '排序和过滤后的数据',
                         original: false
                     });
-                } else if (type === 3) {
-                    this.$refs.table.exportCsv({
-                        filename: '自定义数据',
-                        columns: this.columns8.filter((col, index) => index < 4),
-                        data: this.data7.filter((data, index) => index < 4)
-                    });
-                }
+                } 
             }     
         }
     }
 </script>
 
 <style type="text/css">
-
+.databtn{
+	text-align: right;
+}
 
 </style>
