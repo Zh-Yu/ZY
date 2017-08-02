@@ -8,7 +8,6 @@ import pollutants from 'components/homepage/component/pollutants.vue';
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';    
 
-
 import 'common/stylus/index.styl';
 
 Vue.use(VueRouter);
