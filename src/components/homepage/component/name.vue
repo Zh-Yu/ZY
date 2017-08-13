@@ -57,7 +57,7 @@ import axios from 'axios';
         			diffimag:false
         		},
         		titletextdesc:["癌症实部","癌症虚部","癌症-正常实部","癌症虚部","正常虚部","癌症-正常虚部"],
-        		electinfo:"",
+        		electinfo: "",
         		selectTrue: "",
         	}
 	    },
@@ -90,12 +90,8 @@ import axios from 'axios';
             		if (this.selectButton[key]){            			
         				this.selectTrue = this.selectButton[key];           			
         				// this.electinfo = this.NameQueryResult[key].split(",");
-        				var temparry = JSON.parse(this.NameQueryResult[key]);
-        				for (var i = 0; i < 31; i++) {
-        					this.electinfo += temparry[i] + " ;";
-        					if (i>0 && i%6 == 0)
-        						this.electinfo += "\n"
-        				}
+        				var tempary = JSON.parse(this.NameQueryResult[key]);
+        				this.electinfo = tempary.map((value, index) =>(value.toFixed(2)+(index%7==0?'\n':''))).join(';');
         				// this.titletext = this.titletextdesc[index] + "阻抗数据"        			
             		}　
             	}
@@ -107,6 +103,7 @@ import axios from 'axios';
             		}
             	}
             	this.electinfo ="";
+                console.log(this.selectTrue);
             },
             cancel(){
             	for(var key in this.selectButton){
