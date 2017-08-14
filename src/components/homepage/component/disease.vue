@@ -10,6 +10,7 @@
 </div>
 </template>
 <script>
+import axios from 'axios';
     export default {
         data () {
             return {
@@ -72,7 +73,7 @@
                     },                    
                     {
                         "title": "CT",
-                        "key": "CT",
+                        "key": "ct",
                         "width": 100,
                         "align": "center",
                         "sortable": true,
@@ -83,15 +84,15 @@
                             },
                             {
                                 label: '无',
-                                value: 2
+                                value: 0
                             }
                         ],
                         filterMultiple: false,
                         filterMethod (value, row) {
                             if (value === 1) {
-                                return row.CT == '有';
-                            } else if (value === 2) {
-                                return row.CT == '无';
+                                return row.ct == '有';
+                            } else if (value === 0) {
+                                return row.ct == '无';
                             }
                         }
                     },
@@ -184,169 +185,7 @@
                         "sortable": true
                     }
                 ],
-                data: [
-                    {
-                    	"type": "腺癌",
-                    	"location": "左肺上叶",
-                        "name": "推广名称1",
-                        "CT": '有',
-                        "sex": "男",
-                        "elecdisease": "333",
-                        "elecnormal": "444",
-                        "extra": "计算",                                               
-                        "disreal": 4254,
-                        "disimag": 1438,
-                        "norreal": 100,
-                        "norimag": 285,
-                        "diffreal": 1727,
-                        "diffimag": 558,                   
-                    },
-                    {
-                    	"type": "鳞癌",
-                    	"location": "左肺上叶",
-                        "name": "推广名称1",
-                        "CT": '有',
-                        "sex": "女",    
-                        "elecdisease": "333",
-                        "elecnormal": "444",                	
-                        "extra": "计算",                                                
-                        "disreal": 4254,
-                        "disimag": 1438,
-                        "norreal": 100,
-                        "norimag": 285,
-                        "diffreal": 1727,
-                        "diffimag": 558,                                                  
-                    },
-                    {
-                    	"type": "腺癌",
-                    	"location": "左肺上叶",
-                        "name": "推广名称1",
-                        "CT": '有',
-                        "sex": "男",    
-                        "elecdisease": "333",
-                        "elecnormal": "444",                  
-                        "extra": "仅正常",
-                        "show": '兔',                      
-                        "disreal": 4254,
-                        "disimag": 1438,
-                        "norreal": 100,
-                        "norimag": 285,
-                        "diffreal": 1727,
-                        "diffimag": 558,                         
-                    },
-                    {
-                    	"type": "腺癌",
-                    	"location": "右肺中叶",
-                        "name": "推广名称1",
-                        "CT": '有',
-                        "sex": "男",  
-                        "elecdisease": "333",
-                        "elecnormal": "444",                      
-                        "extra": "混合在一起",                        
-                        "disreal": 4254,
-                        "disimag": 1438,
-                        "norreal": 100,
-                        "norimag": 285,
-                        "diffreal": 1727,
-                        "diffimag": 558,                          
-                    },
-                    {
-                    	"type": "鳞癌",
-                    	"location": "左肺上叶",
-                        "name": "推广名称1",
-                        "CT": '无',
-                        "sex": "男", 
-                        "elecdisease": "333",
-                        "elecnormal": "444",                       
-                        "extra": "计算",                                               
-                        "disreal": 4254,
-                        "disimag": 1438,
-                        "norreal": 100,
-                        "norimag": 285,
-                        "diffreal": 1727,
-                        "diffimag": 558,  
-                    },
-                    {
-                    	"type": "腺癌",
-                    	"location": "左肺上叶",
-                        "name": "推广名称1",
-                        "CT": '有',
-                        "sex": "女",    
-                        "elecdisease": "333",
-                        "elecnormal": "444",                    
-                        "extra": "计算",
-                        "disreal": 4254,
-                        "disimag": 1438,
-                        "norreal": 100,
-                        "norimag": 285,
-                        "diffreal": 1727,
-                        "diffimag": 558,  
-                    },
-                    {
-                    	"type": "腺癌",
-                    	"location": "右肺中叶",
-                        "name": "推广名称1",
-                        "CT": '有',
-                        "sex": "男", 
-                        "elecdisease": "333",
-                        "elecnormal": "444",                       
-                        "extra": "计算",
-                        "disreal": 4254,
-                        "disimag": 1438,
-                        "norreal": 100,
-                        "norimag": 285,
-                        "diffreal": 1727,
-                        "diffimag": 558,  
-                    },
-                    {
-                    	"type": "腺癌",
-                    	"location": "左肺上叶",
-                        "name": "推广名称1",
-                        "CT": '有',
-                        "sex": "女",   
-                        "elecdisease": "333",
-                        "elecnormal": "444",                     
-                        "extra": "计算",
-                        "disreal": 4254,
-                        "disimag": 1438,
-                        "norreal": 100,
-                        "norimag": 285,
-                        "diffreal": 1727,
-                        "diffimag": 558,  
-                    },
-                    {
-                    	"type": "腺癌",
-                    	"location": "右肺中叶",
-                        "name": "推广名称1",
-                        "CT": '无',
-                        "sex": "男",   
-                        "elecdisease": "333",
-                        "elecnormal": "444",                     
-                        "extra": "计算",
-                        "disreal": 4254,
-                        "disimag": 1438,
-                        "norreal": 100,
-                        "norimag": 285,
-                        "diffreal": 1727,
-                        "diffimag": 558,  
-                    },
-                    {
-                    	"type": "鳞癌",
-                    	"location": "左肺上叶",
-                        "name": "推广名称1",
-                        "CT": '有',
-                        "sex": "女",   
-                        "elecdisease": "333",
-                        "elecnormal": "444",                     
-                        "extra": "计算",
-                        "disreal": 4254,
-                        "disimag": 1438,
-                        "norreal": 100,
-                        "norimag": 285,
-                        "diffreal": 1727,
-                        "diffimag": 558,  
-                    }
-                ]
+                data: [],
             }
         },
         methods: {
@@ -362,7 +201,24 @@
                     });
                 } 
             }     
-        }
+        },
+        created(){
+            axios.get('http://localhost:3000/patientList?page=1')		            
+            .then(response =>{ 
+                var processedItem = ["disreal", "disimag", "norreal", "norimag", "diffreal", "diffimag"];
+                var short = response.data.map((item) =>{
+                    for(var key in item)
+                        if(processedItem.indexOf(key) >-1) {
+                            var shortnum = JSON.parse(item[key]).map((value)=>value.toFixed(2)).join('; ');
+                            item[key] = shortnum;
+                        }
+                    
+                    item.ct = item.ct===1?'有':'无';
+                    return item;
+                })
+                this.data = short;
+            })
+        },
     }
 </script>
 
