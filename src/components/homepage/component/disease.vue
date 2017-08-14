@@ -14,38 +14,42 @@ import axios from 'axios';
     export default {
         data () {
             return {
+                typedesc:[],
                 columns: [
                 	{
                 		"title": "序号",
                         "type": "index",
                         "width": 60,
                         "align": "center"
-                    },
+                    },                         //0
                     {
                         "title": "癌变种类",
                         "key": "type",
                         "width": 150,
                         "align": "center",
                         "sortable": true,
-                        filters: [
-                            {
-                                label: '腺癌',
-                                value: 1
-                            },
-                            {
-                                label: '鳞癌',
-                                value: 2
-                            }
-                        ],
+                        filters: [],                        
                         filterMultiple: false,
-                        filterMethod (value, row) {
-                            if (value === 1) {
-                                return row.type == '腺癌';
-                            } else if (value === 2) {
-                                return row.type == '鳞癌';
-                            }
+                        filterMethod (value, row){
+                            // if (value === 1) {
+                            //     return row.type == '腺癌';
+                            // } else if (value === 2) {
+                            //     return row.type == '鳞癌';
+                            // }   
+                            var arr = [];   
+                            for(var key in this){                                
+                                arr.push(key)
+                                if (arr.length == 15)
+                                   console.log(arr)                                                            
+                            }  
+                            console.log(arr.length)              
+                            // console.log(this.length)  //数组5个元素，每个10个对象
+                            // this.filters.map((item, index) =>{
+                            //     if(value === index)
+                            //         return row.type == item.lable;
+                            // })
                         }
-                    },
+                    },                   //1
                     {
                         "title": "癌变位置",
                         "key": "location",
@@ -70,7 +74,7 @@ import axios from 'axios';
                                 return row.location == '右肺中叶';
                             }
                         }
-                    },                    
+                    },                                     //2                   
                     {
                         "title": "CT",
                         "key": "ct",
@@ -95,13 +99,13 @@ import axios from 'axios';
                                 return row.ct == '无';
                             }
                         }
-                    },
+                    },                                 //3
                     {
                         "title": "姓名",
                         "key": "name",
                         "align": "center",
                         "width": 100
-                    },
+                    },                             //4
                     {
                         "title": "性别",
                         "key": "sex",
@@ -126,22 +130,21 @@ import axios from 'axios';
                                 return row.sex == '女';
                             }
                         }
-                    },                  
-                    
+                    },                                 //5                                 
                     {
                         "title": "电导率(癌症)",
                         "key": "elecdisease",
                         "width": 150,
                         "align": "center",
                         "sortable": true
-                    },
+                    },                                   //6
                     {
                         "title": "电导率(正常)",
                         "key": "elecnormal",
                         "width": 150,
                         "align": "center",
                         "sortable": true
-                    },
+                    },                                  //7
                     {
                         "title": "备注",
                         "key": "extra",
@@ -202,21 +205,30 @@ import axios from 'axios';
                 } 
             }     
         },
-        created(){
+        created(){           
             axios.get('http://localhost:3000/patientList?page=1')		            
             .then(response =>{ 
                 var processedItem = ["disreal", "disimag", "norreal", "norimag", "diffreal", "diffimag"];
-                var short = response.data.map((item) =>{
+                var shortdata = response.data.pagecontent.map((item) =>{
                     for(var key in item)
                         if(processedItem.indexOf(key) >-1) {
                             var shortnum = JSON.parse(item[key]).map((value)=>value.toFixed(2)).join('; ');
                             item[key] = shortnum;
-                        }
-                    
+                        }                   
                     item.ct = item.ct===1?'有':'无';
+                    item.sex =item.sex === 0?'男':'女';
                     return item;
                 })
-                this.data = short;
+                this.data = shortdata; 
+                // this.columns[1].filters = response.data.typecontent;
+                var filters = this.columns[1].filters;
+                response.data.typecontent.map((item, index) =>{
+                    filters.push({lable:'',value:0});
+                    filters[index].lable = item.type;
+                    filters[index].value = index;
+                })
+                this.typedesc = filters;
+                // console.log(this.columns[1].filters)
             })
         },
     }

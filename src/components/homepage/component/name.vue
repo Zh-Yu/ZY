@@ -11,7 +11,7 @@
 			<Card>		            	
 				<p slot="title">姓名：{{NameQueryResult.name}}</p>
 				<p class="extra" slot="extra">性别：{{NameQueryResult.sex}}</p>            
-				<p class="des texthight"> 描述：{{NameQueryResult.location + NameQueryResult.type}}</p>
+				<p class="des texthight"> 描述：{{NameQueryResult.location}}{{NameQueryResult.type}}</p>
 				<p class="des">病例图<i-button class="btn1" size="small">弹出</i-button></p>
 				<p class="des">CT图<i-button class="btn1" size="small">弹出</i-button></p>
 				<p class="left">阻抗数据</p>
@@ -37,7 +37,7 @@
 		@on-ok="ok"
 		@on-cancel="cancel"
 		class-name="vertical-center-modal">
-		<div class="content">{{impedanceNumber[impedanceDialog]}}</div>
+		<div class="content">{{{impedanceNumber[impedanceDialog]}}}</div>
 	</Modal>
 </div>
 </template>
@@ -70,7 +70,7 @@ import axios from 'axios';
 				.then(response =>{
 					this.isClicked = false;
 
-					if(response.data.length === 0) {
+					if(response.data.namequery.length === 0) {
 					  alert("啥子玩意你找的是");
 						return;
 					}
@@ -81,7 +81,7 @@ import axios from 'axios';
 						const temparry = JSON.parse(data[key]);
 						displayText[key] = temparry.map((value, index)=>{
 							value = value.toFixed(2);
-							return (value + '\t' + ( index % 4 === 0 ? ' \n' : ''))
+							return (value + '    ' + ( (index+1) % 10 === 0 ? ' <br/>' : ''))
 						}).join('');
 					})
 					this.impedanceNumber = displayText;
