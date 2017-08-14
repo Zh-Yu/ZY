@@ -14,7 +14,6 @@ import axios from 'axios';
     export default {
         data () {
             return {
-                typedesc:[],
                 columns: [
                 	{
                 		"title": "序号",
@@ -30,24 +29,11 @@ import axios from 'axios';
                         "sortable": true,
                         filters: [],                        
                         filterMultiple: false,
-                        filterMethod (value, row){
-                            // if (value === 1) {
-                            //     return row.type == '腺癌';
-                            // } else if (value === 2) {
-                            //     return row.type == '鳞癌';
-                            // }   
-                            var arr = [];   
-                            for(var key in this){                                
-                                arr.push(key)
-                                if (arr.length == 15)
-                                   console.log(arr)                                                            
-                            }  
-                            console.log(arr.length)              
-                            // console.log(this.length)  //数组5个元素，每个10个对象
-                            // this.filters.map((item, index) =>{
-                            //     if(value === index)
-                            //         return row.type == item.lable;
-                            // })
+                        filterMethod(value, row){ 
+                            for(var i=0; i<this.filters.length; i++){
+                                if(value == this.filters[i].value)
+                                    return row.type == this.filters[i].label;
+                            }                                         
                         }
                     },                   //1
                     {
@@ -56,22 +42,12 @@ import axios from 'axios';
                         "width": 150,
                         "align": "center",
                         "sortable": true,
-                        filters: [
-                            {
-                                label: '左肺上叶',
-                                value: 1
-                            },
-                            {
-                                label: '右肺中叶',
-                                value: 2
-                            }
-                        ],
+                        filters: [],
                         filterMultiple: false,
                         filterMethod (value, row) {
-                            if (value === 1) {
-                                return row.location == '左肺上叶';
-                            } else if (value === 2) {
-                                return row.location == '右肺中叶';
+                            for(var i=0; i<this.filters.length; i++){
+                                if(value == this.filters[i].value)
+                                    return row.location == this.filters[i].label;
                             }
                         }
                     },                                     //2                   
@@ -221,13 +197,18 @@ import axios from 'axios';
                 })
                 this.data = shortdata; 
                 // this.columns[1].filters = response.data.typecontent;
-                var filters = this.columns[1].filters;
+                var filterstype = this.columns[1].filters;
                 response.data.typecontent.map((item, index) =>{
-                    filters.push({lable:'',value:0});
-                    filters[index].lable = item.type;
-                    filters[index].value = index;
-                })
-                this.typedesc = filters;
+                    filterstype.push({label:'',value:0});
+                    filterstype[index].label = item.type;
+                    filterstype[index].value = index;
+                })                                           //类型筛选
+                var filterslocation = this.columns[2].filters;
+                response.data.locationcontent.map((item, index) =>{
+                    filterslocation.push({label:'',value:0});
+                    filterslocation[index].label = item.location;
+                    filterslocation[index].value = index;
+                })                                               //位置筛选
                 // console.log(this.columns[1].filters)
             })
         },
