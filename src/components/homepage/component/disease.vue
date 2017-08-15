@@ -1,10 +1,10 @@
 <template>
 <div>
-    <i-table height="500" :columns="columns" :data="data" size="small" v-ref:table border></i-table>
+    <i-table height="500" :columns="columns" :data="data" size="default" v-ref:table border></i-table>
     <br>
-    <Row class="databtn">
-        <i-col span="8"><i-button type="primary" size="large" @click="exportData(1)"><Icon type="ios-download-outline"></Icon> 导出原始数据</i-button></i-col>
-        <i-col span="8"><i-button type="primary" size="large" @click="exportData(2)"><Icon type="ios-download-outline"></Icon> 导出排序和过滤后的数据</i-button></i-col>
+    <Row>
+        <i-col span="8"><i-button type="ghost" size="large" @click="exportData(1)"><Icon type="ios-download-outline"></Icon> 导出原始数据</i-button></i-col>
+        <i-col span="8"><i-button type="ghost" size="large" @click="exportData(2)"><Icon type="ios-download-outline"></Icon> 导出排序和过滤后的数据</i-button></i-col>
         <!-- <i-col span="8"><i-button type="primary" size="large" @click="exportData(3)"><Icon type="ios-download-outline"></Icon> 导出自定义数据</i-button></i-col> -->
         <Page class="page" :current="1" :total="count" simple @on-change="changepage"></Page>
     </Row>   
@@ -110,20 +110,6 @@ import axios from 'axios';
                         }
                     },                                 //5                                 
                     {
-                        "title": "电导率(癌症)",
-                        "key": "elecdisease",
-                        "width": 150,
-                        "align": "center",
-                        "sortable": true
-                    },                                   //6
-                    {
-                        "title": "电导率(正常)",
-                        "key": "elecnormal",
-                        "width": 150,
-                        "align": "center",
-                        "sortable": true
-                    },                                  //7
-                    {
                         "title": "备注",
                         "key": "extra",
                         "width": 150,
@@ -163,6 +149,20 @@ import axios from 'axios';
                         "title": "癌症-正常虚部",
                         "key": "diffimag",
                         "width": 600,
+                        "sortable": true
+                    },
+                    {
+                        "title": "电导率(癌症)",
+                        "key": "elecdisease",
+                        "width": 150,
+                        "align": "center",
+                        "sortable": true
+                    },                                   //6
+                    {
+                        "title": "电导率(正常)",
+                        "key": "elecnormal",
+                        "width": 150,
+                        "align": "center",
                         "sortable": true
                     }
                 ],
@@ -219,7 +219,6 @@ import axios from 'axios';
                 })
             },
             changepage(page){
-                console.log(page);
                 this.requestPage(page);
             }     
         },
@@ -230,8 +229,8 @@ import axios from 'axios';
 </script>
 
 <style type="text/css">
-.databtn{
-	text-align: right;
+.ivu-table-body{
+    height: 450px !important;
 }
 .page{
     position: absolute;
