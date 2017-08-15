@@ -6,7 +6,8 @@
         <i-col span="8"><i-button type="primary" size="large" @click="exportData(1)"><Icon type="ios-download-outline"></Icon> 导出原始数据</i-button></i-col>
         <i-col span="8"><i-button type="primary" size="large" @click="exportData(2)"><Icon type="ios-download-outline"></Icon> 导出排序和过滤后的数据</i-button></i-col>
         <!-- <i-col span="8"><i-button type="primary" size="large" @click="exportData(3)"><Icon type="ios-download-outline"></Icon> 导出自定义数据</i-button></i-col> -->
-    </Row>
+        <Page class="page" :current="1" :total="50" simple @on-change="changepage"></Page>
+    </Row>   
 </div>
 </template>
 <script>
@@ -14,6 +15,7 @@ import axios from 'axios';
     export default {
         data () {
             return {
+
                 columns: [
                 	{
                 		"title": "序号",
@@ -179,6 +181,36 @@ import axios from 'axios';
                         original: false
                     });
                 } 
+            },
+            changepage(page){
+                var url = 'http://localhost:3000/patientList?page=' + page;
+                axios.get(url)                                  
+                .then(response =>{ 
+                    var processedItem = ["disreal", "disimag", "norreal", "norimag", "diffreal", "diffimag"];
+                    var shortdata = response.data.pagecontent.map((item) =>{
+                        for(var key in item)
+                            if(processedItem.indexOf(key) >-1) {
+                                var shortnum = JSON.parse(item[key]).map((value)=>value.toFixed(2)).join('; ');
+                                item[key] = shortnum;
+                            }                   
+                        item.ct = item.ct===1?'有':'无';
+                        item.sex =item.sex === 0?'男':'女';
+                        return item;
+                    })
+                    this.data = shortdata; 
+                    // var filterstype = this.columns[1].filters;
+                    // response.data.typecontent.map((item, index) =>{
+                    //     filterstype.push({label:'',value:0});
+                    //     filterstype[index].label = item.type;
+                    //     filterstype[index].value = index;
+                    // })                                           //类型筛选
+                    // var filterslocation = this.columns[2].filters;
+                    // response.data.locationcontent.map((item, index) =>{
+                    //     filterslocation.push({label:'',value:0});
+                    //     filterslocation[index].label = item.location;
+                    //     filterslocation[index].value = index;
+                    // })                                               //位置筛选
+                })
             }     
         },
         created(){           
@@ -218,6 +250,10 @@ import axios from 'axios';
 <style type="text/css">
 .databtn{
 	text-align: right;
+}
+.page{
+    position: absolute;
+    right: 0;
 }
 
 </style>
