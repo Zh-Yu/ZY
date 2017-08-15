@@ -182,10 +182,12 @@ import axios from 'axios';
                     });
                 } 
             },
-            changepage(page){
-                var url = 'http://localhost:3000/patientList?page=' + page;
+            requestPage(pageNumber, isInit = false) {
+                var url = 'http://localhost:3000/patientList?page=' + pageNumber;
+                this.$Loading.start();
                 axios.get(url)                                  
                 .then(response =>{ 
+                    this.$Loading.finish();
                     var processedItem = ["disreal", "disimag", "norreal", "norimag", "diffreal", "diffimag"];
                     var shortdata = response.data.pagecontent.map((item) =>{
                         for(var key in item)
@@ -198,39 +200,31 @@ import axios from 'axios';
                         return item;
                     })
                     this.data = shortdata; 
+
+                    if(isInit) {
+                        this.count = response.data.count[0].count;         //查询数据总数，条数=总数/10 + 1
+                        var filterstype = this.columns[1].filters;
+                        response.data.typecontent.map((item, index) =>{
+                            filterstype.push({label:'',value:0});
+                            filterstype[index].label = item.type;
+                            filterstype[index].value = index;
+                        })                                           //类型筛选
+                        var filterslocation = this.columns[2].filters;
+                        response.data.locationcontent.map((item, index) =>{
+                            filterslocation.push({label:'',value:0});
+                            filterslocation[index].label = item.location;
+                            filterslocation[index].value = index;
+                        })   
+                    }
                 })
+            },
+            changepage(page){
+                console.log(page);
+                this.requestPage(page);
             }     
         },
-        created(){           
-            axios.get('http://localhost:3000/patientList?page=1')		            
-            .then(response =>{ 
-                var processedItem = ["disreal", "disimag", "norreal", "norimag", "diffreal", "diffimag"];
-                var shortdata = response.data.pagecontent.map((item) =>{
-                    for(var key in item)
-                        if(processedItem.indexOf(key) >-1) {
-                            var shortnum = JSON.parse(item[key]).map((value)=>value.toFixed(2)).join('; ');
-                            item[key] = shortnum;
-                        }                   
-                    item.ct = item.ct===1?'有':'无';
-                    item.sex =item.sex === 0?'男':'女';
-                    return item;
-                })
-                this.data = shortdata;                      //把数据改成两位小数
-                this.count = response.data.count[0].count;         //查询数据总数，条数=总数/10 + 1
-                var filterstype = this.columns[1].filters;
-                response.data.typecontent.map((item, index) =>{
-                    filterstype.push({label:'',value:0});
-                    filterstype[index].label = item.type;
-                    filterstype[index].value = index;
-                })                                           //类型筛选
-                var filterslocation = this.columns[2].filters;
-                response.data.locationcontent.map((item, index) =>{
-                    filterslocation.push({label:'',value:0});
-                    filterslocation[index].label = item.location;
-                    filterslocation[index].value = index;
-                })                                               //位置筛选
-                // console.log(this.columns[1].filters)
-            })
+        created(){         
+            this.requestPage(1, true);
         },
     }
 </script>
