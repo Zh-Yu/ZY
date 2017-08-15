@@ -6,7 +6,7 @@
         <i-col span="8"><i-button type="primary" size="large" @click="exportData(1)"><Icon type="ios-download-outline"></Icon> 导出原始数据</i-button></i-col>
         <i-col span="8"><i-button type="primary" size="large" @click="exportData(2)"><Icon type="ios-download-outline"></Icon> 导出排序和过滤后的数据</i-button></i-col>
         <!-- <i-col span="8"><i-button type="primary" size="large" @click="exportData(3)"><Icon type="ios-download-outline"></Icon> 导出自定义数据</i-button></i-col> -->
-        <Page class="page" :current="1" :total="50" simple @on-change="changepage"></Page>
+        <Page class="page" :current="1" :total="count" simple @on-change="changepage"></Page>
     </Row>   
 </div>
 </template>
@@ -15,7 +15,7 @@ import axios from 'axios';
     export default {
         data () {
             return {
-
+                count: 0,
                 columns: [
                 	{
                 		"title": "序号",
@@ -198,18 +198,6 @@ import axios from 'axios';
                         return item;
                     })
                     this.data = shortdata; 
-                    // var filterstype = this.columns[1].filters;
-                    // response.data.typecontent.map((item, index) =>{
-                    //     filterstype.push({label:'',value:0});
-                    //     filterstype[index].label = item.type;
-                    //     filterstype[index].value = index;
-                    // })                                           //类型筛选
-                    // var filterslocation = this.columns[2].filters;
-                    // response.data.locationcontent.map((item, index) =>{
-                    //     filterslocation.push({label:'',value:0});
-                    //     filterslocation[index].label = item.location;
-                    //     filterslocation[index].value = index;
-                    // })                                               //位置筛选
                 })
             }     
         },
@@ -227,8 +215,8 @@ import axios from 'axios';
                     item.sex =item.sex === 0?'男':'女';
                     return item;
                 })
-                this.data = shortdata; 
-                // this.columns[1].filters = response.data.typecontent;
+                this.data = shortdata;                      //把数据改成两位小数
+                this.count = response.data.count[0].count;         //查询数据总数，条数=总数/10 + 1
                 var filterstype = this.columns[1].filters;
                 response.data.typecontent.map((item, index) =>{
                     filterstype.push({label:'',value:0});
@@ -255,5 +243,7 @@ import axios from 'axios';
     position: absolute;
     right: 0;
 }
-
+/*.ivu-page-simple .ivu-page-simple-pager input{
+    width: 60px;
+}*/
 </style>
