@@ -243,7 +243,7 @@ import axios from 'axios';
     position: absolute;
     right: 0;
 }
-/*.ivu-page-simple .ivu-page-simple-pager input{
-    width: 60px;
-}*/
+.ivu-page-simple .ivu-page-simple-pager input{
+    width: 40px !important;
+}
 </style>
