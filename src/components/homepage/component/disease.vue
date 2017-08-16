@@ -6,7 +6,7 @@
         <i-col span="8"><i-button type="ghost" size="large" @click="exportData(1)"><Icon type="ios-download-outline"></Icon> 导出原始数据</i-button></i-col>
         <i-col span="8"><i-button type="ghost" size="large" @click="exportData(2)"><Icon type="ios-download-outline"></Icon> 导出排序和过滤后的数据</i-button></i-col>
         <!-- <i-col span="8"><i-button type="primary" size="large" @click="exportData(3)"><Icon type="ios-download-outline"></Icon> 导出自定义数据</i-button></i-col> -->
-        <!-- <Page class="page" :current="1" :total="count" simple @on-change="changepage"></Page> -->
+        <Page class="page" :current="1" :total="count" simple @on-change="changepage" :page-size="9"></Page>
     </Row>   
 </div>
 </template>
@@ -112,6 +112,7 @@ import axios from 'axios';
                         "title": "备注",
                         "key": "extra",
                         "width": 150,
+                        "align": "center",
                         "sortable": true,
                         filters: [
                             {
@@ -141,53 +142,67 @@ import axios from 'axios';
                     {
                         "title": "癌症实部",
                         "key": "disreal",
-                        "width": 600,
+                        "width": 300,
+                        "align": "center",
+                        "ellipsis":true
                         // "sortable": true
                     },
                     {
                         "title": "癌症虚部",
                         "key": "disimag",
-                        "width": 600,
+                        "width": 300,
+                        "align": "center",
+                        "ellipsis":true
                         // "sortable": true
                     },
                     {
                         "title": "正常实部",
                         "key": "norreal",
-                        "width": 600,
+                        "width": 300,
+                        "align": "center",
+                        "ellipsis":true
                         // "sortable": true
                     },
                     {
                         "title": "正常虚部",
                         "key": "norimag",
-                        "width": 600,
+                        "width": 300,
+                        "align": "center",
+                        "ellipsis":true
                         // "sortable": true
                     },
                     {
                         "title": "癌症-正常实部",
                         "key": "diffreal",
-                        "width": 600,
+                        "width": 300,
+                        "align": "center",
+                        "ellipsis":true
                         // "sortable": true
                     },
                     {
                         "title": "癌症-正常虚部",
                         "key": "diffimag",
-                        "width": 600,
+                        "width": 300,
+                        "align": "center",
+                        "ellipsis":true
                         // "sortable": true
                     },
-                    {
-                        "title": "电导率(癌症)",
-                        "key": "elecdisease",
-                        "width": 150,
-                        "align": "center",
-                        // "sortable": true
-                    },                                   //6
-                    {
-                        "title": "电导率(正常)",
-                        "key": "elecnormal",
-                        "width": 150,
-                        "align": "center",
-                        // "sortable": true
-                    }
+                    // {
+                    //     "title": "电导率(癌症)",
+                    //     "key": "elecdisease",
+                    //     "width": 150,
+                    //     "align": "center",
+                    //     "ellipsis":true
+                    //     // "sortable": true
+                    // },                                   //6
+                    // {
+                    //     "title": "电导率(正常)",
+                    //     "key": "elecnormal",
+                    //     "width": 150,
+                    //     "align": "center",
+                    //     "ellipsis":true
+                    //     // "sortable": true
+                    // }
                 ],
                 data: [],
             }
@@ -204,7 +219,10 @@ import axios from 'axios';
                         original: false
                     });
                 } 
-            },    
+            }, 
+            changepage(page){
+
+            }   
         },
         created(){         
              var url = 'http://localhost:3000/patientList';
