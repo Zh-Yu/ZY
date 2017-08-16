@@ -28,14 +28,50 @@ import axios from 'axios';
                         "key": "type",
                         "width": 150,
                         "align": "center",
-                        "sortable": true,
-                        filters: [],                        
+                        // "sortable": true,
+                        filters: [],       //{value:number, label:string}                    
                         filterMultiple: false,
-                        filterMethod(value, row){ 
-                            for(var i=0; i<this.filters.length; i++){
-                                if(value == this.filters[i].value)
-                                    return row.type == this.filters[i].label;
-                            }                                         
+                        filterMethod(value, row){
+                            // for(var i=0;i<this.filters.length;i++){
+                            //     if(value ==this.filters[i].value){
+                            //         var filturl = 'http://localhost:3000/patientfilter?command=' + this.filters[i].label;
+                            //     // axios.get(filturl)
+                                //     .then(response =>{
+                                //         console.log(response.data)
+                                //     }  
+                                var arr=[];
+                                var temp = this.filters[0].label;
+                                // console.log(temp)
+                                arr.push(temp)
+                                // console.log(arr)
+                                for(var i=0;i<arr.length;i++){
+                                    if(arr[i] == arr[0])
+                                        return;
+                                    else
+                                        arr.push(temp);
+                                }                                    
+                                                                   
+                                console.log(arr)
+
+                                // }
+                                
+                                // console.log(this.filters[0].label);  //本页的10个数组，每个数组有5个对象 鳞癌
+                                // console.log(this.filters.length);  //5
+                                // function filtdata(filturl){
+                                // time = time + 1;
+                                // if(time ===1){
+                                //     axios.get(filturl)
+                                //     .then(response =>{
+                                        // console.log(filturl)
+                                //     })
+                                // time = 0;
+                                // }                                    
+                                // }
+                            // }
+                            // for(var i=0; i<this.filters.length; i++){
+                            //     if(value == this.filters[i].value)
+                            //         return row.type == this.filters[i].label;
+                            // }                                         
                         }
                     },                   //1
                     {
@@ -43,7 +79,7 @@ import axios from 'axios';
                         "key": "location",
                         "width": 150,
                         "align": "center",
-                        "sortable": true,
+                        // "sortable": true,
                         filters: [],
                         filterMultiple: false,
                         filterMethod (value, row) {
@@ -58,7 +94,7 @@ import axios from 'axios';
                         "key": "ct",
                         "width": 100,
                         "align": "center",
-                        "sortable": true,
+                        // "sortable": true,
                         filters: [
                             {
                                 label: '有',
@@ -89,7 +125,7 @@ import axios from 'axios';
                         "key": "sex",
                         "width": 100,
                         "align": "center",
-                        "sortable": true,
+                        // "sortable": true,
                         filters: [
                             {
                                 label: '男',
@@ -113,57 +149,57 @@ import axios from 'axios';
                         "title": "备注",
                         "key": "extra",
                         "width": 150,
-                        "sortable": true
+                        // "sortable": true
                     },
                     {
                         "title": "癌症实部",
                         "key": "disreal",
                         "width": 600,
-                        "sortable": true
+                        // "sortable": true
                     },
                     {
                         "title": "癌症虚部",
                         "key": "disimag",
                         "width": 600,
-                        "sortable": true
+                        // "sortable": true
                     },
                     {
                         "title": "正常实部",
                         "key": "norreal",
                         "width": 600,
-                        "sortable": true
+                        // "sortable": true
                     },
                     {
                         "title": "正常虚部",
                         "key": "norimag",
                         "width": 600,
-                        "sortable": true
+                        // "sortable": true
                     },
                     {
                         "title": "癌症-正常实部",
                         "key": "diffreal",
                         "width": 600,
-                        "sortable": true
+                        // "sortable": true
                     },
                     {
                         "title": "癌症-正常虚部",
                         "key": "diffimag",
                         "width": 600,
-                        "sortable": true
+                        // "sortable": true
                     },
                     {
                         "title": "电导率(癌症)",
                         "key": "elecdisease",
                         "width": 150,
                         "align": "center",
-                        "sortable": true
+                        // "sortable": true
                     },                                   //6
                     {
                         "title": "电导率(正常)",
                         "key": "elecnormal",
                         "width": 150,
                         "align": "center",
-                        "sortable": true
+                        // "sortable": true
                     }
                 ],
                 data: [],
