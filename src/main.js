@@ -5,6 +5,7 @@ import App from './App';
 import name from 'components/homepage/component/name.vue';
 import disease from 'components/homepage/component/disease.vue';
 import pollutants from 'components/homepage/component/pollutants.vue';
+import onestation from 'components/homepage/component/onestation.vue'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';    
 
@@ -22,15 +23,6 @@ let router = new VueRouter({        //创建一个路由器实例
 	linkActiveClass: 'active'
 });
 
-// router.map({
-// 	'/name':{
-// 		component: name
-// 	},
-// 	'/disease':{
-// 		component: disease
-// 	}
-// });
-
 router.map({
 	'/information/name':{
 		component: name
@@ -38,8 +30,11 @@ router.map({
 	'/information/disease':{
 		component: disease
 	},
-	'/station/pollutants':{
+	'station/pollutants':{
 		component: pollutants
+	},
+	'onestation/1':{
+		component: onestation
 	}
 });
 
