@@ -70,29 +70,7 @@
                 空气质量
               </template>
               <Menu-item key="station/pollutants">污染物数据</Menu-item>
-              <Menu-item key="onestation/1">市监测中心观测站</Menu-item>
-              <Menu-item key="onestation/2">南京路观测站</Menu-item>
-              <Menu-item key="onestation/3">北辰科技园区观测站</Menu-item>
-              <Menu-item key="onestation/4">天山路观测站</Menu-item>
-              <Menu-item key="onestation/5">永明路观测站</Menu-item>
-              <Menu-item key="onestation/6">团泊洼观测站</Menu-item>
-              <Menu-item key="onestation/7">南口路观测站</Menu-item>
-              <Menu-item key="onestation/8">勤俭路观测站</Menu-item>
-              <Menu-item key="onestation/9">大直沽八号路观测站</Menu-item>
-              <Menu-item key="onestation/10">前进路观测站</Menu-item>
-              <Menu-item key="onestation/11">跃进路观测站</Menu-item>
-              <Menu-item key="onestation/12">第四大街观测站</Menu-item>
-              <Menu-item key="onestation/13">航天路观测站</Menu-item>
-              <Menu-item key="onestation/14">汉北路观测站</Menu-item>
-              <Menu-item key="onestation/15">河西一经路观测站</Menu-item>
-              <Menu-item key="onestation/16">津沽路观测站</Menu-item>
-              <Menu-item key="onestation/17">宾水西道观测站</Menu-item>
-              <Menu-item key="onestation/18">大理道观测站</Menu-item>
-              <Menu-item key="onestation/19">中山北路观测站</Menu-item>
-              <Menu-item key="onestation/20">勤俭道观测站</Menu-item>
-              <Menu-item key="onestation/21">前进道观测站</Menu-item>
-              <Menu-item key="onestation/22">淮河道观测站</Menu-item>
-              <Menu-item key="onestation/23">西四道观测站</Menu-item>
+              <Menu-item key="station/byStation">按观测站</Menu-item>
             </Submenu>
           </Menu>
         </i-col>

@@ -5,7 +5,7 @@ import App from './App';
 import name from 'components/homepage/component/name.vue';
 import disease from 'components/homepage/component/disease.vue';
 import pollutants from 'components/homepage/component/pollutants.vue';
-import onestation from 'components/homepage/component/onestation.vue'
+import bystation from 'components/homepage/component/bystation.vue'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';    
 
@@ -33,8 +33,8 @@ router.map({
 	'station/pollutants':{
 		component: pollutants
 	},
-	'onestation/1':{
-		component: onestation
+	'station/byStation':{
+		component: bystation
 	}
 });
 
