@@ -14,7 +14,7 @@ import axios from 'axios';
                 columns: [
                     {
                         title: '日期',
-                        key: 'date',
+                        key: "date_format(a.date,'%Y/%m/%d')",
                         sortable: true,
                         "align": "center",
                         width: 110
@@ -28,7 +28,7 @@ import axios from 'axios';
                     },
                     {
                         title: '空气质量',
-                        key: 'arrquality',
+                        key: 'airquality',
                         width: 150,
                         sortable: true,
                         "align": "center",
@@ -85,18 +85,17 @@ import axios from 'axios';
                     }                                                                     
                 ],
                 data: [
-                    {
-                        date: '',
-                        station: '',
-                        CO2: '',
-                        NO2: '',
-                        CO: '',
-                        O3: '',
-                        PM2: '',
-                        PM10: '',
-                        AQI: ''
-
-                    },                    
+                    // {
+                    //     date: '',
+                    //     AQI: '',
+                    //     空气质量：'',
+                    //     CO2: '',
+                    //     NO2: '',
+                    //     CO: '',
+                    //     O3: '',
+                    //     PM2: '',
+                    //     PM10: '',                        
+                    // },                    
                 ],
                 stationList: [],
                 model1: ''
@@ -107,7 +106,8 @@ import axios from 'axios';
                 var url = 'http://localhost:3000/getbystation?stationName=' + value;
                 axios.get(url)
                 .then(response =>{
-                    console.log(response.data);
+                    this.data = response.data;
+                    console.log(this.data)
                 })
             }
         },

@@ -41,17 +41,17 @@
               </template>
               <Menu-item key="information/name">按姓名</Menu-item>
               <Menu-item key="information/disease">按病症/有无CT</Menu-item>
-              <Menu-item key="information/add">添加</Menu-item>
-            </Submenu>
+              <!-- <Menu-item key="information/add">添加</Menu-item> -->
+      <!--       </Submenu>
             <Submenu key="CT">
               <template slot="title">
                 <Icon type="ios-keypad"></Icon>
                 CT
               </template>
-              <Menu-item key="CT/dicomCT">原始CT</Menu-item>
+              <Menu-item key="CT/dicomCT">原始CT</Menu-item> -->
               <!-- <Menu-item key="2/2-2">CT</Menu-item> -->
               <!-- <Menu-item key="2/2-3">添加</Menu-item> -->
-            </Submenu>
+            <!-- </Submenu> -->
             <!-- <Submenu key="3">
               <template slot="title">
                 <Icon type="ios-analytics"></Icon>

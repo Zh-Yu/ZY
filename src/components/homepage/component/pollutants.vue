@@ -4,13 +4,14 @@
 	</div>  
 </template>
 <script>
+import axios from 'axios';
     export default {
         data () {
             return {
                 columns: [
                     {
                         title: '日期',
-                        key: 'date',
+                        key: "date_format(a.date,'%Y/%m/%d')",
                         sortable: true,
                         "align": "center",
                         width: 110
@@ -30,7 +31,7 @@
                     },
                     {
                         title: '空气质量',
-                        key: 'arrquality',
+                        key: 'airquality',
                         width: 150,
                         sortable: true,
                         "align": "center",
@@ -87,20 +88,26 @@
                     }                                                                     
                 ],
                 data: [
-                    {
-                        date: '',
-                        station: '',
-                        CO2: '',
-                        NO2: '',
-                        CO: '',
-                        O3: '',
-                        PM2: '',
-                        PM10: '',
-                        AQI: ''
-
-                    },                    
+                    // {
+                    //     date: '',
+                    //     station: '',
+                    //     CO2: '',
+                    //     NO2: '',
+                    //     CO: '',
+                    //     O3: '',
+                    //     PM2: '',
+                    //     PM10: '',
+                    //     AQI: ''
+                    // },                    
                 ]
             }
+        },
+        created(){
+            axios.get('http://localhost:3000/pollutionToday')
+            .then(response =>{
+                this.data = response.data;
+                console.log(this.response.data)
+            })
         }
     }
 </script>
