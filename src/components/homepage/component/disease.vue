@@ -221,7 +221,6 @@ import axios from 'axios';
                 } 
             }, 
             changepage(page){
-
             }   
         },
         created(){         

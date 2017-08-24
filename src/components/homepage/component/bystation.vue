@@ -1,12 +1,13 @@
 <template>
 	<div>
-        <i-select :model.sync="model1" style="width:200px">        
-            <i-option v-for="item in cityList" :value="item.value">{{ item.label }}</i-option>
+        <i-select :model.sync="model1" style="width:200px" @on-change="changeSelect">        
+            <i-option v-for="item in stationList" :value="item.value">{{ item.label }}</i-option>
         </i-select>
 		<i-table border size="default" height="500" :columns="columns" :data="data"></i-table>
 	</div>  
 </template>
 <script>
+import axios from 'axios';
     export default {
         data () {
             return {
@@ -15,12 +16,6 @@
                         title: '日期',
                         key: 'date',
                         sortable: true,
-                        "align": "center",
-                        width: 110
-                    },
-                    {
-                        title: '观测站',
-                        key: 'station',
                         "align": "center",
                         width: 110
                     },
@@ -103,34 +98,29 @@
 
                     },                    
                 ],
-                cityList: [
-                    {
-                        value: 'beijing',
-                        label: '北京市'
-                    },
-                    {
-                        value: 'shanghai',
-                        label: '上海市'
-                    },
-                    {
-                        value: 'shenzhen',
-                        label: '深圳市'
-                    },
-                    {
-                        value: 'hangzhou',
-                        label: '杭州市'
-                    },
-                    {
-                        value: 'nanjing',
-                        label: '南京市'
-                    },
-                    {
-                        value: 'chongqing',
-                        label: '重庆市'
-                    }
-                ],
+                stationList: [],
                 model1: ''
             }
+        },
+        methods:{
+            changeSelect(value){
+                var url = 'http://localhost:3000/getbystation?stationName=' + value;
+                axios.get(url)
+                .then(response =>{
+                    console.log(response.data);
+                })
+            }
+        },
+        created(){
+            axios.get('http://localhost:3000/getStation')
+            .then(response =>{
+                for(var i=0;i<response.data.length;i++)
+                    this.stationList.push({});
+                response.data.map((item, index) =>{
+                    this.stationList[index].label = item.station;
+                    this.stationList[index].value = item.station;
+                })
+            })
         }
     }
 </script>
