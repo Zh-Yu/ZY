@@ -223,14 +223,35 @@ import axios from 'axios';
             changepage(page){
             }   
         },
-        created(){         
-             var url = 'http://localhost:3000/patientList';
+        created(){ 
+            axios.get('http://localhost:3000/listDesc')
+            .then(response =>{
+                var filterstype = this.columns[1].filters;
+                response.data.typecontent.map((item, index) =>{
+                    filterstype.push({label:'',value:0});
+                    filterstype[index].label = item.type;
+                    filterstype[index].value = index;
+                })                                           //类型筛选
+                var filterslocation = this.columns[2].filters;
+                response.data.locationcontent.map((item, index) =>{
+                    filterslocation.push({label:'',value:0});
+                    filterslocation[index].label = item.location;
+                    filterslocation[index].value = index;
+                }) 
+            })      
+            if(window.localStorage.getItem('diseaseStorage')) {
+                console.log('检测到本地存储的文件，已为您自动恢复');
+                this.data = JSON.parse(window.localStorage.getItem('diseaseStorage'));
+                this.count = this.data.length;
+            }
+            else{
+                var url = 'http://localhost:3000/patientList';
                 this.$Loading.start();
                 axios.get(url)                                  
                 .then(response =>{ 
                     this.$Loading.finish();
                     var processedItem = ["disreal", "disimag", "norreal", "norimag", "diffreal", "diffimag"];
-                    var shortdata = response.data.patientList.map((item) =>{
+                    var shortdata = response.data.map((item) =>{
                         for(var key in item)
                             if(processedItem.indexOf(key) >-1) {
                                 var shortnum = JSON.parse(item[key]).map((value)=>value.toFixed(2)).join('; ');
@@ -241,20 +262,12 @@ import axios from 'axios';
                         return item;
                     })
                     this.data = shortdata; 
-                        this.count = response.data.patientList.length;         //查询数据总数
-                        var filterstype = this.columns[1].filters;
-                        response.data.typecontent.map((item, index) =>{
-                            filterstype.push({label:'',value:0});
-                            filterstype[index].label = item.type;
-                            filterstype[index].value = index;
-                        })                                           //类型筛选
-                        var filterslocation = this.columns[2].filters;
-                        response.data.locationcontent.map((item, index) =>{
-                            filterslocation.push({label:'',value:0});
-                            filterslocation[index].label = item.location;
-                            filterslocation[index].value = index;
-                        })   
-                })
+                    var storepatienlist = JSON.stringify(shortdata);                   
+                    window.localStorage.setItem('diseaseStorage', storepatienlist);      //存储localstorage
+                    this.count = response.data.length;         //查询数据总数
+                      
+                })                     
+            }           
         },
     }
 </script>
